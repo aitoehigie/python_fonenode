@@ -93,6 +93,20 @@ def available_numbers(limit=20, offset=0)
     /v1/numbers/available", data=payload)
     return response
 
+def call_details(call_id):
+    #This function gets details about a call.
+    payload = dict(call_id=call_id)
+    response = requests.get("https://api.fonenode.com
+    /v1/calls", data=payload)
+    return response
+
+def list_calls(limit=20, offset=0):
+    #This function lists inbound and outband calls
+    #via your account.
+    payload = dict(limit=limit, offset=offset)
+    response = requests.get("https://api.fonenode.com/
+    v1/calls/", data=payload, auth=(auth_id, auth_secret))    
+
 
 
 
