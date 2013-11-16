@@ -1,7 +1,6 @@
-Changelog file for pythonfonenode
-This is a python wrapper for fonenode.com
+#Changelog file for pythonfonenode
+#This is a python wrapper for fonenode.com
 
-TODO
-1. Hopefully when I get online and fully test the wrapper,
-I will include error handling in it. For now I just want to
-get the wrapper working.
+16th of November, 2013
+1. Added all the main functionalities of fonenode.com
+to the wrapper.
