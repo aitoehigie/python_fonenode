@@ -22,8 +22,14 @@ def create_response(text, voice="woman", retries=1, get_digits="true", ):
     data=payload)
     return response
 
+def delete_response(response_id):
+    #This function is used to delete a response previously created.
+    payload = dict(response_id=response_id)
+    response = requests.delete("https://api.fonenode.com/v1/responses", data=payload, auth=(auth_id, auth_secret))
+    return response    
+
 def list_responses(limit=20):
-    #This response is to list all created responses.
+    #This function is used to list all created responses.
     payload = dict(limit=limit)
     response = requests.get("https://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
     data=payload)
@@ -84,6 +90,7 @@ def get_own_numbers(limit=20, offset=0):
     payload = dict(limit=limit, offset=offset)
     response = requests.get("https://api.fonenode.com/v1
     /numbers", data=payload)
+    return response
 
 def available_numbers(limit=20, offset=0)
     #This function returns numbers available for purchase
@@ -105,7 +112,23 @@ def list_calls(limit=20, offset=0):
     #via your account.
     payload = dict(limit=limit, offset=offset)
     response = requests.get("https://api.fonenode.com/
-    v1/calls/", data=payload, auth=(auth_id, auth_secret))    
+    v1/calls/", data=payload, auth=(auth_id, auth_secret))   
+    return response
+
+def call(to=to, response_id=response_id, from=from):
+    #This function is used to make calls to one or 
+    #more numbers using a response already created.
+    payload = dict(to=to, response_id=response_id, from=from)
+    response = requests.post("https://api.fonenode.com/v1/calls",
+    data=payload, auth=(auth_id, auth_secret))
+    return response
+
+def quick_call(to=to, text=text, voice="woman", from=from):
+    #This function is used to make a quick call without creating a response.
+    payload = dict(to=to, text=text, voice=voice, from=from)
+    response = requests.post("https://api.fonenode.com/v1/calls/quick",
+    data=payload, auth=(auth_id, auth_secret))
+    return response
 
 
 
