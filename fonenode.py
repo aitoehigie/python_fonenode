@@ -65,6 +65,36 @@ def renew_number(number_id, months=1):
     /", data=payload, auth=(auth_id, auth_secret))
     return response
 
+def purchase_number(number_id, months=1):
+    #This function is used to purchase a number from available numbers.
+    payload = dict(number_id=number_id, months=1)
+    response = requests.post("https://api.fonenode.com/v1/numbers", data=payload,
+    auth = (auth_id, auth_secret))
+    return response
+
+def get_number(number_id):
+    #This function returns details about a number
+    payload = dict(number_id=number_id)
+    response = requests.get("https://api.fonenode.com
+    /v1/numbers", data=payload)
+    return response
+
+def get_own_numbers(limit=20, offset=0):
+    #This function returns the number you own
+    payload = dict(limit=limit, offset=offset)
+    response = requests.get("https://api.fonenode.com/v1
+    /numbers", data=payload)
+
+def available_numbers(limit=20, offset=0)
+    #This function returns numbers available for purchase
+    #for inbound calls.
+    payload = dict(limit=limit, offset=offset)
+    response = requests.get("https://api.fonenode.com
+    /v1/numbers/available", data=payload)
+    return response
+
+
+
 
 
 	
