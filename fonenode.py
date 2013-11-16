@@ -10,23 +10,23 @@
 auth_id = "auth_id"
 auth_secret = "auth_secret"
 #Get the above values from your fonenode user dashboard
-base_url = "http://api.fonenode.com/v1/"
+base_url = "https://api.fonenode.com/v1/"
 
 import requests
 
 def create_response(text):
     payload = dict(text=text)
-    requests.post("http://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
+    requests.post("https://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
     data=payload)
 
 def list_responses(limit=20):
     payload = dict(limit=limit)
-    return requests.get("http://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
+    return requests.get("https://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
 data=payload)
 
 def get_response_details(response_id):
     payload = dict(response_id=response_id)
-    return requests.get("http://api.fonenode.com/v1/responses",
+    return requests.get("https://api.fonenode.com/v1/responses",
     auth=(auth_id, auth_secret), data=payload)
 
 
