@@ -1,0 +1,7 @@
+Changelog file for pythonfonenode
+This is a python wrapper for fonenode.com
+
+TODO
+1. Hopefully when I get online and fully test the wrapper,
+I will include error handling in it. For now I just want to
+get the wrapper working.
