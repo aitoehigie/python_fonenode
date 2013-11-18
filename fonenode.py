@@ -6,6 +6,7 @@
 # @version 0.0.1
 #Dependencies:
 #Python requests library. Kindly get and install from http://www.python-requests.org/
+#Kindly not that these fonenode doesnt work for Airtel Nigeria numbers, at least for me during testing.
 
 auth_id = "auth_id"
 auth_secret = "auth_secret"
