@@ -4,3 +4,4 @@
 16th of November, 2013
 1. Added all the main functionalities of fonenode.com
 to the wrapper.
+2. The call and quick_call functions now work.
