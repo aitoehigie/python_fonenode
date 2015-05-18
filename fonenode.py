@@ -8,19 +8,19 @@
 #Python requests library. Kindly get and install from http://www.python-requests.org/
 #Kindly note that these fonenode does not work for Airtel Nigeria numbers, at least for me during testing.
 
-auth_id = "user_id"
-auth_secret = "user_secret"
+auth_id = ""
+auth_secret = ""
 #Get the above values from your fonenode user dashboard
 base_url = "https://api.fonenode.com/v1/"
 
 import requests
 
-def create_response(text, voice="woman", retries=1, get_digits="true", ):
+def create_response(text, voice="woman", retries=1, get_digits="true" ):
     #This function creates a response that you can attach \
     #to a call or number
     payload = dict(text=text)
-    response = requests.post("https://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
-    data=payload, verify=False)
+    response = requests.post("https://api.fonenode.com/v1/responses", verify=False, auth=(auth_id, auth_secret),
+    data=payload)
     return response
 
 def delete_response(response_id):
@@ -116,20 +116,21 @@ def list_calls(limit=20, offset=0):
     v1/calls/", data=payload, auth=(auth_id, auth_secret), verify=False)   
     return response
 
-#def call(to=to, response_id=response_id, ifrom=ifrom):
+def call(to="to", response_id="response_id", from_who="who"):
     #This function is used to make calls to one or 
     #more numbers using a response already created.
-#    payload = dict(to=to, response_id=response_id, ifrom=ifrom)
-#    response = requests.post("https://api.fonenode.com/v1/calls",\
-#    data=payload, auth=(auth_id, auth_secret), verify=False)
-#    return response
+    payload = {"to":to, "response_id":response_id, "from":from_who}
+    response = requests.post("https://api.fonenode.com/v1/calls",\
+    data=payload, auth=(auth_id, auth_secret), verify=False)
+    return response
 
-#def quick_call(to=to, text=text, voice="woman", ifrom=ifrom):
-#    #This function is used to make a quick call without creating a response.
-#    payload = dict(to=to, text=text, voice=voice, ifrom=ifrom)
-#    response = requests.post("https://api.fonenode.com/v1/calls/quick",\
-#    data=payload, auth=(auth_id, auth_secret), verify=False)
-#    return response
+def quick_call(to="to", text="text", from_who="who", voice="woman"):
+    #This function is used to make a quick call without creating a response.
+    #payload = dict(to=to, text=text, voice=voice)
+    payload = {"to":to, "text":text, "from":from_who, "voice":voice}
+    response = requests.post("https://api.fonenode.com/v1/calls/quick",\
+    data=payload, auth=(auth_id, auth_secret), verify=False)
+    return response
 
 
 
