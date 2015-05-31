@@ -8,8 +8,8 @@
 #Python requests library. Kindly get and install from http://www.python-requests.org/
 #Kindly note that these fonenode does not work for Airtel Nigeria numbers, at least for me during testing.
 
-auth_id = ""
-auth_secret = ""
+auth_id = "dbab5b29"
+auth_secret = "Mp3VhUGm3cvWLwB"
 #Get the above values from your fonenode user dashboard
 base_url = "https://api.fonenode.com/v1/"
 
