@@ -11,6 +11,11 @@ auth_id = ""
 auth_secret = ""
 #Get the above values from your fonenode user dashboard
 base_url = "https://api.fonenode.com/v1/"
+sms_url = ""
+#this should be set to the user defined endpoint that would handle responses from the fonenode server
+sender = 2348168200400
+#this should be your sms enabled fonenode number
+
 
 import requests
 
@@ -130,6 +135,56 @@ def quick_call(to="to", text="text", from_who="who", voice="woman"):
     response = requests.post("https://api.fonenode.com/v1/calls/quick",\
     data=payload, auth=(auth_id, auth_secret), verify=False)
     return response
+
+####SMS features for SMS enabled fonenode numbers
+
+def received_messages(limit=20):
+    #This function is used to return all received messages
+    response = requests.get("https://api.fonenode.com/v1/sms/inbox", \
+    auth = (auth_id, auth_secret), verify=False)
+    return response
+
+def received_message(message_id):
+    #This function returns the details of the received message with the specified message_id passed in as an argument
+    #puzzling behavior. look into why it returns all messages and not the specified one
+    payload = dict(message_id=message_id)
+    response = requests.get("https://api.fonenode.com/v1/sms/inbox", \
+    data = payload, auth = (auth_id, auth_secret), verify = False)
+    return response
+
+def send_sms(to, text, sender=sender):
+    #this function sends sms using fonenode
+    payload = {"to":to, "text":text, "from":sender}
+    response = requests.post("https://api.fonenode.com/v1/sms", \
+    data = payload, auth = (auth_id, auth_secret), verify=False)
+    return response
+
+def sent_messages(limit=20):
+    #this function returns all sent messages
+    response = requests.get("https://api.fonenode.com/v1/sms/outbox", \
+    auth = (auth_id, auth_secret), verify=False)
+    return response
+
+def get_numbers():
+    #this function lists all numbers attached to a fonenode account
+    response = requests.get("https://api.fonenode.com/v1/numbers", \
+    auth = (auth_id, auth_secret), verify=False)
+    return response
+
+def attach_number(number_id, sms_url=sms_url):
+    #this function attaches a fonenode number to an SMS endpoint
+    payload = {"id": number_id, "sms_url": sms_url}
+    response = requests.put("https://api.fonenode.com/v1/numbers/"+number_id, \
+    data = payload, auth = (auth_id, auth_secret), verify = False)
+    return response
+
+
+
+
+
+
+ 
+
 
 
 
