@@ -179,9 +179,9 @@ def attach_number(number_id, sms_url=sms_url):
     return response
 
 def sms_to_call():
-    #this function would immediately call any number that /
-    #sends an sms to the fonenode number
-    #I cant implement this now because I havent defined a 
+    #this function would immediately call any number that \
+    #sends an sms to the fonenode number \
+    #I cant implement this now because I havent defined a \
     #proper sms endpoint
     return
 
