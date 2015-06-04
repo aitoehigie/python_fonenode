@@ -13,7 +13,7 @@ auth_secret = ""
 base_url = "https://api.fonenode.com/v1/"
 sms_url = ""
 #this should be set to the user defined endpoint that would handle responses from the fonenode server
-sender = 2348168200400
+sender = ""
 #this should be your sms enabled fonenode number
 
 
