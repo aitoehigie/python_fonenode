@@ -3,10 +3,10 @@ from flask import request
 import fonenode
 app = Flask(__name__)
 
-@app.route("/", methods=["GET"])
+@app.route("/", methods=["POST"])
 def smsToCall():
-    fonenode.quick_call(to=request.args.get("from"), text="Dont let go",\
-    from_who="2348029401212")
+    pass
+    
 
 
 if __name__ == "__main__":
