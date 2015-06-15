@@ -7,8 +7,8 @@
 #Dependencies:
 #Python requests library. Kindly get and install from http://www.python-requests.org/
 
-AUTH_ID = "dbab5b29"
-AUTH_SECRET = "Mp3VhUGm3cvWLwB"
+AUTH_ID = ""
+AUTH_SECRET = ""
 #Get the above values from your fonenode user dashboard
 
 BASE_URL = "https://api.fonenode.com/v1/"
