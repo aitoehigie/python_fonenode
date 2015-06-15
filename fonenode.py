@@ -3,17 +3,19 @@
 # https://github.com/aitoehigie/python_fonenode
 #
 # @author Pascal Ehigie Aito (@pystar) <aitoehigie@gmail.com>
-# @version 0.0.1
+# @version 0.9.0
 #Dependencies:
 #Python requests library. Kindly get and install from http://www.python-requests.org/
 
-auth_id = ""
-auth_secret = ""
+AUTH_ID = "dbab5b29"
+AUTH_SECRET = "Mp3VhUGm3cvWLwB"
 #Get the above values from your fonenode user dashboard
-base_url = "https://api.fonenode.com/v1/"
-sms_url = ""
+
+BASE_URL = "https://api.fonenode.com/v1/"
+SMS_URL = "http://8e03bc94.ngrok.io"
 #this should be set to the user defined endpoint that would handle responses from the fonenode server
-sender = 
+
+SENDER = "2348168200400"
 #this should be your sms enabled fonenode number
 
 
@@ -23,20 +25,20 @@ def create_response(text, voice="woman", retries=1, get_digits="true" ):
     #This function creates a response that you can attach \
     #to a call or number
     payload = dict(text=text)
-    response = requests.post("https://api.fonenode.com/v1/responses", verify=False, auth=(auth_id, auth_secret),
+    response = requests.post("https://api.fonenode.com/v1/responses", verify=False, auth=(AUTH_ID, AUTH_SECRET),
     data=payload)
     return response
 
 def delete_response(response_id):
     #This function is used to delete a response previously created.
     payload = dict(response_id=response_id)
-    response = requests.delete("https://api.fonenode.com/v1/responses", data=payload, auth=(auth_id, auth_secret), verify=False)
+    response = requests.delete("https://api.fonenode.com/v1/responses", data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)
     return response    
 
 def list_responses(limit=20):
     #This function is used to list all created responses.
     payload = dict(limit=limit)
-    response = requests.get("https://api.fonenode.com/v1/responses", auth=(auth_id, auth_secret),
+    response = requests.get("https://api.fonenode.com/v1/responses", auth=(AUTH_ID, AUTH_SECRET),
     data=payload, verify=False)
     return response
 
@@ -44,13 +46,13 @@ def get_response_details(response_id):
     #This function is to get your response details
     payload = dict(response_id=response_id)
     response = requests.get("https://api.fonenode.com/v1/responses",
-    auth=(auth_id, auth_secret), data=payload, verify=False)
+    auth=(AUTH_ID, AUTH_SECRET), data=payload, verify=False)
     return response
 
 def get_billing_history(limit=20):
     #This function is used to get your billing history.
     response = requests.get("https://api.fonenode.com/v1/billing",
-    auth = (auth_id, auth_secret), verify=False)
+    auth = (AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def update_number_response(response_id):
@@ -59,28 +61,28 @@ def update_number_response(response_id):
     #fired when an inbound call is made to the number.
     payload = dict(response_id=response_id)
     response = requests.put("https://api.fonenode.com/v1/numbers/", 
-    data=payload, auth=(auth_id, auth_secret), verify=False)
+    data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def deactivate_number(number_id):
     #This function is used to release a number earlier purchased
     payload = dict(number_id=number_id)
     response = requests.delete("https://api.fonenode.com/v1\
-    /numbers/", data=payload, auth=(auth_id, auth_secret), verify=False)
+    /numbers/", data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def renew_number(number_id, months=1):
     #This function is used to renew a number earlier purchased.
     payload = dict(number_id=number_id, months=months)
     response = requests.put("https://api.fonenode.com/v1/numbers\
-    /", data=payload, auth=(auth_id, auth_secret), verify=False)
+    /", data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def purchase_number(number_id, months=1):
     #This function is used to purchase a number from available numbers.
     payload = dict(number_id=number_id, months=1)
     response = requests.post("https://api.fonenode.com/v1/numbers", data=payload,
-    auth = (auth_id, auth_secret), verify=False)
+    auth = (AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def get_number(number_id):
@@ -117,23 +119,23 @@ def list_calls(limit=20, offset=0):
     #via your account.
     payload = dict(limit=limit, offset=offset)
     response = requests.get("https://api.fonenode.com/\
-    v1/calls/", data=payload, auth=(auth_id, auth_secret), verify=False)   
+    v1/calls/", data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)   
     return response
 
-def call(to="to", response_id="response_id", from_who="who"):
+def call(to=None, response_id=None, from_who=None):
     #This function is used to make calls to one or 
     #more numbers using a response already created.
     payload = {"to":to, "response_id":response_id, "from":from_who}
     response = requests.post("https://api.fonenode.com/v1/calls",\
-    data=payload, auth=(auth_id, auth_secret), verify=False)
+    data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
-def quick_call(to="to", text="text", from_who="who", voice="woman"):
+def quick_call(to=None, text=None, from_who=None, voice="woman"):
     #This function is used to make a quick call without creating a response.
     #payload = dict(to=to, text=text, voice=voice)
     payload = {"to":to, "text":text, "from":from_who, "voice":voice}
     response = requests.post("https://api.fonenode.com/v1/calls/quick",\
-    data=payload, auth=(auth_id, auth_secret), verify=False)
+    data=payload, auth=(AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 ####SMS features for SMS enabled fonenode numbers
@@ -141,7 +143,7 @@ def quick_call(to="to", text="text", from_who="who", voice="woman"):
 def received_messages(limit=20):
     #This function is used to return all received messages
     response = requests.get("https://api.fonenode.com/v1/sms/inbox", \
-    auth = (auth_id, auth_secret), verify=False)
+    auth = (AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def received_message(message_id):
@@ -149,33 +151,33 @@ def received_message(message_id):
     #puzzling behavior. look into why it returns all messages and not the specified one
     payload = dict(message_id=message_id)
     response = requests.get("https://api.fonenode.com/v1/sms/inbox", \
-    data = payload, auth = (auth_id, auth_secret), verify = False)
+    data = payload, auth = (AUTH_ID, AUTH_SECRET), verify = False)
     return response
 
-def send_sms(to, text, sender=sender):
+def send_sms(to=None, text=None, sender=SENDER):
     #this function sends sms using fonenode
     payload = {"to":to, "text":text, "from":sender}
     response = requests.post("https://api.fonenode.com/v1/sms", \
-    data = payload, auth = (auth_id, auth_secret), verify=False)
+    data = payload, auth = (AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def sent_messages(limit=20):
     #this function returns all sent messages
     response = requests.get("https://api.fonenode.com/v1/sms/outbox", \
-    auth = (auth_id, auth_secret), verify=False)
+    auth = (AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
 def get_numbers():
     #this function lists all numbers attached to a fonenode account
     response = requests.get("https://api.fonenode.com/v1/numbers", \
-    auth = (auth_id, auth_secret), verify=False)
+    auth = (AUTH_ID, AUTH_SECRET), verify=False)
     return response
 
-def attach_number(number_id, sms_url=sms_url):
+def attach_number(number_id=None, sms_url=SMS_URL):
     #this function attaches a fonenode number to an SMS endpoint
     payload = {"id": number_id, "sms_url": sms_url}
     response = requests.put("https://api.fonenode.com/v1/numbers/"+number_id, \
-    data = payload, auth = (auth_id, auth_secret), verify = False)
+    data = payload, auth = (AUTH_ID, AUTH_SECRET), verify = False)
     return response
 
 def sms_to_call():
